@@ -111,7 +111,7 @@
 
 1. 执行关键动作
 2. `browser_console_messages(level=\"info\")`
-3. `browser_network_requests(includeStatic=false)`
+3. `browser_network_requests(requestBody=false, requestHeaders=false, static=false)`
 4. 汇报摘要
 
 注意：

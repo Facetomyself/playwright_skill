@@ -55,7 +55,7 @@
 
 - 触发信号：请求未发出、状态码不符、网络日志与页面表现不一致。
 - 恢复动作：
-  1. 调用 `browser_network_requests(includeStatic=false)`
+  1. 调用 `browser_network_requests(requestBody=false, requestHeaders=false, static=false)`
   2. 必要时结合 `browser_console_messages(level=\"info\")`
   3. 输出关键请求 URL、方法、状态码
 
