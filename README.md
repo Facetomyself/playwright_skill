@@ -255,7 +255,7 @@ C:\Users\shang\.codex\skills\plyawright-skill
 `SKILL.md` 是真正的执行契约，核心约束包括：
 
 - 仅调用 `mcp__Playwright__*`
-- 固定走 `NAVIGATE -> SNAPSHOT -> ACT -> VERIFY -> CAPTURE`
+- 固定走 `NAVIGATE -> SNAPSHOT -> ACT -> VERIFY -> CAPTURE -> CLOSE（按需）`
 - 默认不偏离 `9224 + D:\chrome-mcp-pw`
 - 失败后先重试和重建快照，不乱切实现路径
 - 扩展模式只在用户明确要求或默认路径受阻时启用
@@ -314,12 +314,12 @@ C:\Users\shang\.codex\skills\plyawright-skill
 最小闭环一般是：
 
 ```text
-browser_navigate(url="...")
-browser_snapshot()
-browser_fill_form(...) / browser_type(...)
-browser_click(...)
-browser_wait_for(...)
-browser_snapshot() / browser_take_screenshot(...)
+mcp__Playwright__browser_navigate(url="...")
+mcp__Playwright__browser_snapshot()
+mcp__Playwright__browser_fill_form(...) / mcp__Playwright__browser_type(...)
+mcp__Playwright__browser_click(...)
+mcp__Playwright__browser_wait_for(...)
+mcp__Playwright__browser_snapshot() / mcp__Playwright__browser_take_screenshot(...)
 ```
 
 ### 为什么强制先 `snapshot`
@@ -389,7 +389,7 @@ mcp__Playwright__browser_network_requests(requestBody=false, requestHeaders=fals
 
 文件上传这块有两个限制最容易踩坑：
 
-1. `browser_file_upload(paths=[...])` 要求绝对路径
+1. `mcp__Playwright__browser_file_upload(paths=[...])` 要求绝对路径
 2. 默认情况下，Playwright MCP 只允许访问 workspace roots 内的文件
 
 如果你要上传 workspace 外面的文件，要么：

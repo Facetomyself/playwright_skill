@@ -34,7 +34,7 @@
 
 - `mcp__Playwright__browser_file_upload`：上传单个或多个文件；先触发文件选择，再注入路径。官方 README 说明默认只允许 MCP roots 内的路径，除非服务端启用了 `allowUnrestrictedFileAccess`。
 - `mcp__Playwright__browser_console_messages`：抓控制台日志，适合排查前端异常。
-- `mcp__Playwright__browser_network_requests`：抓请求列表，适合确认接口是否真正发出。
+- `mcp__Playwright__browser_network_requests`：抓请求列表，适合确认接口是否真正发出；默认只看请求清单时用 `requestBody=false, requestHeaders=false, static=false`。
 
 ### 运行时兜底
 
@@ -48,7 +48,7 @@
 
 - 假定 Playwright MCP 已接入 `http://127.0.0.1:9224`
 - 复用 `D:\chrome-mcp-pw`
-- 优先 `navigate -> snapshot -> act -> verify`
+- 优先 `navigate -> snapshot -> act -> verify -> capture`，必要时再 `close`
 
 扩展路径：
 

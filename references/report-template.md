@@ -5,7 +5,7 @@
 ## 单步执行模板
 
 ```text
-phase: <NAVIGATE|SNAPSHOT|ACT|VERIFY|CAPTURE>
+phase: <NAVIGATE|SNAPSHOT|ACT|VERIFY|CAPTURE|CLOSE>
 action: <tool + purpose>
 evidence:
 - url: <current-url>

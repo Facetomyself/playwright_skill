@@ -27,7 +27,7 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\shang\.codex\skills\plyawrigh
 
 - 仅调用 `mcp__Playwright__*` 前缀工具。
 - 不混用其他命名空间的浏览器工具。
-- 在调用工具前，先声明当前阶段（`NAVIGATE` / `SNAPSHOT` / `ACT` / `VERIFY` / `CAPTURE`）。
+- 在调用工具前，先声明当前阶段（`NAVIGATE` / `SNAPSHOT` / `ACT` / `VERIFY` / `CAPTURE` / `CLOSE`）。
 - 默认主流程只围绕“固定 9224 浏览器实例 + 当前页面任务”展开，不主动切换成隔离 profile、headless、录像、trace 等扩展模式。
 - 若工具第一次调用失败，先按重试策略处理；不要立刻切换实现路径，更不要自作聪明改成别的浏览器方案。
 
@@ -84,7 +84,7 @@ mcp__Playwright__browser_snapshot()
 1. `browser_snapshot`：验证页面结构、标题、按钮状态、表单值变化。
 2. `browser_wait_for`：等待文本出现、消失，或显式等待几秒。
 3. `browser_take_screenshot`：需要可视证据时截图。
-4. `browser_network_requests`：确认接口是否发出、状态是否正确。
+4. `browser_network_requests`：确认接口是否发出、状态是否正确；默认只看请求清单时使用 `requestBody=false, requestHeaders=false, static=false`。
 5. `browser_console_messages`：确认前端错误、警告、日志。
 
 ### 2.4 默认输出模板
@@ -203,6 +203,7 @@ mcp__Playwright__browser_snapshot()
 - 输出中包含可验证证据（快照结论、截图文件、网络摘要、控制台摘要之一）。
 - 若发生失败，已返回标准化错误码和下一步动作。
 - 若启用了扩展模式，已明确说明触发原因和退出条件。
+- 若执行了 `CLOSE`，已明确说明关闭了哪个标签页或保留了哪个现场。
 
 ## 10) 快速执行模板
 
